@@ -3,7 +3,7 @@ import { NFT } from "./nft";
 import { data } from "./data";
 import { InfoPanel } from "./infoPanel";
 
-// // Base scene
+// Base scene
 const baseScene = new Entity();
 baseScene.addComponent(new GLTFShape("models/baseScene.glb"));
 baseScene.addComponent(
@@ -13,12 +13,15 @@ baseScene.addComponent(
 );
 engine.addEntity(baseScene);
 
-// // UI Elements
+// UI Elements
 const canvas = new UICanvas();
 const infoPanel = new InfoPanel(canvas);
 const infoPanelForCustomNFT = new InfoPanel(canvas);
 
-// // NFTs
+infoPanelForCustomNFT.nftImage.sourceWidth = 600;
+infoPanelForCustomNFT.nftImage.sourceHeight = 400;
+
+// NFTs
 const Nilakash = new NFT(
   new NFTShape("ethereum://" + data[0].address),
   new Transform({
@@ -29,8 +32,7 @@ const Nilakash = new NFT(
   data[0].id,
   infoPanelForCustomNFT
 );
-infoPanelForCustomNFT.nftImage.sourceWidth = 600;
-infoPanelForCustomNFT.nftImage.sourceHeight = 400;
+
 Nilakash.getComponent(Transform).scale.set(
   Nilakash.originalScale.x,
   Nilakash.originalScale.y,
@@ -52,4 +54,22 @@ cryptoKittiesNFT
     cryptoKittiesNFT.originalScale.x,
     cryptoKittiesNFT.originalScale.y,
     cryptoKittiesNFT.originalScale.z
+  );
+
+const knownOrigin = new NFT(
+  new NFTShape("ethereum://" + data[2].address),
+  new Transform({
+    position: new Vector3(11, 2.5, 8),
+    scale: new Vector3(4, 4, 4),
+  }),
+  new Color3(1.5, 1.5, 0.0),
+  data[2].id,
+  infoPanel
+);
+knownOrigin
+  .getComponent(Transform)
+  .scale.set(
+    knownOrigin.originalScale.x,
+    knownOrigin.originalScale.y,
+    knownOrigin.originalScale.z
   );
